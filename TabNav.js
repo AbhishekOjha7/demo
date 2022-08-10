@@ -1,17 +1,15 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useNavigation,NavigationContainer } from '@react-navigation/native'
+import { useNavigation, NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Register from './Register'
 import Login from './Login'
 import Details from './Form'
-import Homepage from './Nav'
+import  MyStack from './Nav'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Tab = createMaterialBottomTabNavigator();
-
-
 
 export default function TabNav() {
     return (
@@ -23,27 +21,24 @@ export default function TabNav() {
                 screenOptions={{
                     tabBarActiveBackgroundColor: '#222',
                     tabBarInactiveBackgroundColor: '#4C4C4C',
-                    tabBarActiveTintColor: '#fff',
+                    tabBarActiveTintColor: '#fff',        ///screenoptions yeha koi kam mhi kar rha
                     tabBarInactiveTintColor: 'orange',
-                    // barStyle:{backgroundColor:'#000000'}
-                }}>
-                <Tab.Screen name="Home" component={Homepage}
+                    barStyle: { backgroundColor: '#000000' }
+                }}
+            >
+                <Tab.Screen name="Home" component={MyStack}
                     options={{
-                        
                         headerTintColor: 'white',
                         headerStyle: { backgroundColor: 'tomato' },
                         tabBarIcon: ({ focused }) => {
                             return (
                                 <Image style={{ height: 25, width: 25, }}
                                     source={!focused ? require('./src/assets/images/home.png') : require('./src/assets/images/home_not.png')} />
-
                             )
                         },
                         tabBarColor: '#001219',
-
                     }}
                 />
-
                 <Tab.Screen name='Search' component={Search}
                     options={{
                         headerTintColor: 'white',
@@ -60,6 +55,7 @@ export default function TabNav() {
 
                 <Tab.Screen name='Register' component={Register}
                     options={{
+                        tabBarBadge:3,
                         tabBarIcon: ({ focused }) => {
                             return (
                                 <Image style={{ height: 25, width: 25 }}
@@ -96,33 +92,36 @@ export default function TabNav() {
     )
 }
 
-function HomeScreen() {
-    const navigation = useNavigation();
-    return (
-        <SafeAreaView style={{flex:1}}>
-            <View style={{alignItems:'center'}}>
-            
-                    <Image style={{height:40,width:40}}
-                    source={{uri:'https://cdn-icons-png.flaticon.com/128/1946/1946436.png'}}
-                    />
-            
-            </View>
-            <View style={{justifyContent:'center',alignItems:'center'}}>
-                <Text>{'Home'}</Text>
-                <TouchableOpacity
-                    onPress={() => { navigation.navigate('Login') }}>
-                    <Text>{'Login'}</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+// function HomeScreen() {
+//     const navigation = useNavigation();
+//     return (
+//         <SafeAreaView style={{ flex: 1 }}>
+//             <View style={{ alignItems: 'center' }}>
 
-    )
-}
+//                 <Image style={{ height: 40, width: 40 }}
+//                     source={{ uri: 'https://cdn-icons-png.flaticon.com/128/1946/1946436.png' }}
+//                 />
+
+//             </View>
+//             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+//                 <Text>{'Home'}</Text>
+//                 <TouchableOpacity
+//                     onPress={() => { navigation.navigate('Login') }}>
+//                     <Text>{'Login'}</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         </SafeAreaView>
+
+//     )
+// }
 function Search({ navigation }) {
     return (
-        <View>
+        <SafeAreaView>
+            <View>
             <Text>{'Search here'}</Text>
         </View>
+        </SafeAreaView>
+       
     )
 }
 

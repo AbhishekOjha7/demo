@@ -26,18 +26,14 @@ const MyStack = () => {
       <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={HomeScreen}
                 options={{
-                  headerTintColor: 'white',
-                  headerStyle: { backgroundColor: 'tomato' },
-                  title:'Home page'
-                  
+                  headerTintColor: 'black',
+                  headerStyle: { backgroundColor: 'aqua' },
+                  title:'Home page', 
                 }}
                  />
-
         <Stack.Screen name="Details" component={DetailsScreen}
-        options={{ headerStyleInterpolator: forFade }}
-         />
+        options={{ headerStyleInterpolator: forFade }}/>
         <Stack.Screen name="Search" component={SearchScreen}/>
-
       </Stack.Navigator>
     //  </NavigationContainer> 
   );
@@ -59,7 +55,6 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
-
 function DetailsScreen({ navigation,route}) {
   const {names}=route.params;
   const [count,setCount]=useState(true);
@@ -99,7 +94,7 @@ function DetailsScreen({ navigation,route}) {
        <Text>searching page</Text>
        <Button
      title='go to Homepage'
-     onPress={()=>{navigation.navigate('Search')}}/>
+     onPress={()=>{navigation.navigate('Home')}}/>
     
       </View>
     )

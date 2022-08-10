@@ -86,7 +86,6 @@ const Login = () => {
                     autoCapitalize='none'
                     value={email}
                     autoCorrect={false}
-
                     onChangeText={value => {
                         setEmail(value);
                         handleValidEmail(value);
@@ -149,11 +148,9 @@ const Login = () => {
                     <Text style={styles.footer}>{'Already have an account?'}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate('Login') }}>
+                    onPress={() => { navigation.navigate('Login')}}>
                     <Text style={styles.secondfooter}>{'Login'}</Text>
                 </TouchableOpacity>
-
-
             </View>
         </SafeAreaView>
 
