@@ -4,6 +4,7 @@ import { eye } from './src/assets'
 import { hide } from './src/assets'
 import { tic } from './src/assets'
 import { circle } from './src/assets'
+import { useNavigation } from '@react-navigation/native'
 
 
 
@@ -15,9 +16,10 @@ const Login = () => {
     const [passError, setPassError] = useState('');
     const [password, passwordError] = useState('');
     const [confirmPassword, confirmPasswordError] = useState('');
-    const [check,unCheck]=useState(true);
-    const [imag,changeImage]=useState(false);
-    const [register,setregister]=useState(true);
+    const [check, unCheck] = useState(true);
+    const [imag, changeImage] = useState(false);
+    const [register, setregister] = useState(true);
+    const navigation = useNavigation();
 
 
     const passwordValidation = () => {
@@ -28,7 +30,7 @@ const Login = () => {
             return false;
         }
     }
-     
+
     const handleValidEmail = val => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
@@ -44,21 +46,21 @@ const Login = () => {
         setHidePass(!hidePass)
         setImage(!image);
     };
-    
-    change1 = ()=>{
+
+    change1 = () => {
         setHidePass(!hidePass)
-        setImage(!image); 
+        setImage(!image);
     }
 
 
     const img = image ? eye : hide;
 
-    const img1 = imag ? tic : circle  ;
+    const img1 = imag ? tic : circle;
 
-    onchangeCheck=()=>{
-     unCheck(!check)
-     changeImage(!imag)
-     setregister(!register)
+    onchangeCheck = () => {
+        unCheck(!check)
+        changeImage(!imag)
+        setregister(!register)
     }
     return (
         <SafeAreaView style={styles.parent}>
@@ -72,7 +74,7 @@ const Login = () => {
             <View style={styles.password}>
                 <Text>{'Name'}</Text>
                 <TextInput
-                    // placeholder={'Name'}
+                // placeholder={'Name'}
                 />
             </View>
 
@@ -93,9 +95,9 @@ const Login = () => {
             </View>
 
             {emailValidError ? <Text style={{ padding: 10, color: 'red', paddingLeft: 30 }}>{emailValidError}</Text> : null}
-            
+
             <View style={styles.password}>
-            <Text>{'Password'}</Text>
+                <Text>{'Password'}</Text>
                 {/* <Text style={styles.emailplaceholder}>{'Password'}</Text> */}
                 <TextInput
                     value={password}
@@ -112,7 +114,7 @@ const Login = () => {
             </View>
 
             <View style={styles.password}>
-            <Text>{' Confirm Password'}</Text>
+                <Text>{' Confirm Password'}</Text>
                 <TextInput
                     value={confirmPassword}
                     // placeholder='Confirm Password'
@@ -125,24 +127,19 @@ const Login = () => {
                     <Image source={img} style={{ height: 20, width: 20 }} />
                 </TouchableOpacity>
             </View>
-            <Text style={{ padding: 10, color: 'red', paddingLeft: 30 }}>{passError?passError:' '}</Text>
-
-
+            <Text style={{ paddingHorizontal: 10, color: 'red', paddingLeft: 30 }}>{passError ? passError : ' '}</Text>
             <View style={styles.forget}>
-                    {/* <Image source={require('./src/assets/icCheck_2022-03-24/icCheck.png')} /> */}
-                    <TouchableOpacity onPress={onchangeCheck}>
-                    <Image source={img1} style={{height:20,width:20, resizeMode: 'contain',marginRight:5}}/>
-                    </TouchableOpacity>
-                  
-                    <Text style={styles.textforget}>{'Agree to terms of Service & Privacy Policy'}</Text>
-
+                <TouchableOpacity onPress={onchangeCheck}>
+                    <Image source={img1} style={{ height: 20, width: 20, resizeMode: 'contain', marginRight: 5 }} />
+                </TouchableOpacity>
+                <Text style={styles.textforget}>{'Agree to terms of Service & Privacy Policy'}</Text>
             </View>
 
             <View>
-                <TouchableOpacity disabled={register} onPress={()=>{passwordValidation() ? setPassError(' ') : setPassError('Password must match')}} style={styles.login}>
+                <TouchableOpacity disabled={register} onPress={() => { passwordValidation() ? setPassError(' ') : setPassError('Password must match') }} style={styles.login}>
 
                     <Text style={styles.loginbutton}>{'REGISTER'}</Text>
-                    
+
                 </TouchableOpacity>
             </View>
 
@@ -151,7 +148,8 @@ const Login = () => {
 
                     <Text style={styles.footer}>{'Already have an account?'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => { navigation.navigate('Login') }}>
                     <Text style={styles.secondfooter}>{'Login'}</Text>
                 </TouchableOpacity>
 
@@ -201,35 +199,39 @@ const styles = StyleSheet.create({
         padding: 20,
         borderColor: 'grey',
         borderRadius: 5,
-        marginTop: 20,
+        marginTop: 15,
         paddingTop: 10,
     },
     forget: {
-        marginTop: 20,
+        marginBottom: 10,
         color: 'grey',
-        // paddingRight: 20,
+        paddingRight: 20,
         alignItems: 'center',
-        flexDirection:'row',
-        justifyContent:'center',
+        flexDirection: 'row',
+        // marginHorizontal: 45,
+
+        justifyContent: 'center',
     },
     textforget: {
         color: 'grey', fontWeight: '400',
-        flexDirection:'row'
+        flexDirection: 'row',
+        marginTop: 5
     },
     login: {
         backgroundColor: '#fee7a4',
         alignItems: 'center',
         padding: 20,
-        margin: 40,
+        marginHorizontal: 40,
+        marginVertical: 5,
         borderRadius: 10
     },
     loginbutton: {
-        fontWeight: 'bold', fontSize: 20
+        fontWeight: 'bold', fontSize: 15,
     },
     reg: {
         alignItems: 'center',
-        position: 'absolute',
-        bottom: '5%',
+        // position: 'absolute',
+        // bottom: '5%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -241,8 +243,10 @@ const styles = StyleSheet.create({
         fontSize: 25, fontWeight: 'bold'
     },
     img: {
+        height: '28%',
         width: '100%',
-        position: 'absolute'
+        position: 'absolute',
+
     }
 
 

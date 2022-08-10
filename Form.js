@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, FlatList, Alert, Image } from 'react-native'
 import React, { useState, useRef } from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -13,6 +14,7 @@ const Form = () => {
     const [disabled2, setDisabled2] = useState(true);
     const [button, setButton] = useState('Add Details');
     const [index,setIndex]=useState(-1);
+    const navigation=useNavigation();
     const refindex = useRef()
     handleValidName = () => {
         let reg1 = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;

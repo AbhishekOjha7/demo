@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, Image, TextInput, StyleSheet, TouchableOpacit
 import React, {useState} from 'react'
 import {eye} from './src/assets'
 import {hide} from './src/assets'
+import { useNavigation } from '@react-navigation/native'
 
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const[image, setImage] = useState(false);
      const [emailValidError, setEmailValidError] = useState('');
+     const navigation=useNavigation();
 
     const handleValidEmail = val => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -88,7 +90,8 @@ const Login = () => {
                 <TouchableOpacity>
                 <Text style={styles.footer}>{'Not Registered Yet?'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity 
+                onPress={()=>{navigation.navigate('Register')}}>
                 <Text style={styles.secondfooter}>{'Register'}</Text>
                 </TouchableOpacity>
                 
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     loginbutton:{
-        ontWeight: 'bold', fontSize: 20 
+        fontWeight: 'bold', fontSize: 20 
     },
     reg: {
         alignItems: 'center',
